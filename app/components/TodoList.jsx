@@ -8,7 +8,7 @@
 			var renderTodos = () => {
 				return todos.map((todoItem) => {
 					return (
-						<Todo key = {todoItem.id} {...todoItem} />	
+						<Todo key = {todoItem.id} {...todoItem} onToggle={this.props.onToggle} />	
 					);
 				});
 			};

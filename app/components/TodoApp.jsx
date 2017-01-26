@@ -14,19 +14,23 @@
 				todos: [
 					{
 						id: uuid(),
-						text: 'Walk the dog'
+						text: 'Walk the dog',
+						isCompleted: false
 					},
 					{
 						id: uuid(),
-						text: 'Clean the yard'
+						text: 'Clean the yard',
+						isCompleted: true
 					},
 					{
 						id: uuid(),
-						text: 'Clean the room'
+						text: 'Clean the room',
+						isCompleted: true
 					},
 					{
 						id: uuid(),
-						text: 'Study React'
+						text: 'Study React',
+						isCompleted: false
 					}
 				]
 			}
@@ -37,9 +41,22 @@
 					...this.state.todos,
 					{
 						id: uuid(),
-						text: text
+						text: text,
+						isCompleted: false
 					}
 				]
+			});
+		},
+		handleToggle: function(id) {
+			var updatedTodos = this.state.todos.map(function(todo) {
+				if(todo.id === id) {
+					todo.isCompleted = !todo.isCompleted;
+				}
+				return todo;
+			});
+
+			this.setState({
+				todos: updatedTodos
 			});
 		},
 		handleSearch: function(showCompleted, searchText) {
@@ -54,7 +71,7 @@
 			return (
 				<div> 
 				<TodoSearch onSearch = {this.handleSearch} />
-				<TodoList todos = {todos} /> 
+				<TodoList todos = {todos} onToggle= {this.handleToggle} /> 
 				<AddTodo onAddTodo = {this.handleAddTodo}/>
 				</div>
 
